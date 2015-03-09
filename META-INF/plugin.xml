@@ -11,13 +11,6 @@
     <idea-version since-build="131"/>
 
     <actions>
-        <!-- This case is OK. I can see "Copy as JSON" item in Alt+Insert popup -->
-        <action id="testAction" class="com.riabchenko.CopyAction" text="Copy as JSON"
-                description="Copies JSON representation of instance in Variables or Watches debug views">
-            <add-to-group group-id="GenerateGroup" anchor="last"/>
-        </action>
-
-        <!-- This case is NOT OK. There is no "Copy as JSON" in variables/watches/inspection popups -->
         <action id="CopyAsJson.Copy" class="com.riabchenko.CopyAction" text="Copy as JSON"
                 description="Copies JSON representation of instance in Variables or Watches debug views">
             <add-to-group group-id="Debugger.FramePanelPopup" anchor="last" />
