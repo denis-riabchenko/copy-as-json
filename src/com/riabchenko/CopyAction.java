@@ -19,7 +19,12 @@ public class CopyAction extends BaseCopyAction {
     private static final Key TO_STRING_METHOD_KEY = new Key("CachedToStringMethod");
 
     protected String processText(Project project, Value value, DebuggerTreeNodeImpl debuggerTreeNode, DebuggerContextImpl debuggerContext) {
-        return DebuggerUtilsEx.getValueOrErrorAsString(debuggerContext.createEvaluationContext(), value);
+        // OK
+        //return DebuggerUtilsEx.getValueOrErrorAsString(debuggerContext.createEvaluationContext(), value);
+
+        // NOT OK
+        //  LinkageError: loader constraint violation: loader (instance of com/intellij/ide/plugins/cl/PluginClassLoader) previously initiated loading for a different type with name "com/sun/jdi/Value": loader constraint violation: loader (instance of com/intellij/ide/plugins/cl/PluginClassLoader) previously initiated loading for a different type with name "com/sun/jdi/Value"
+        return getValueOrErrorAsString(debuggerContext.createEvaluationContext(), value);
     }
 
 
