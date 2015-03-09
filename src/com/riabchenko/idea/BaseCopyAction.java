@@ -1,9 +1,10 @@
-package com.riabchenko;
+package com.riabchenko.idea;
 
 import com.intellij.debugger.DebuggerBundle;
 import com.intellij.debugger.DebuggerInvocationUtil;
 import com.intellij.debugger.DebuggerManagerEx;
 import com.intellij.debugger.actions.DebuggerAction;
+import com.intellij.debugger.engine.evaluation.EvaluateException;
 import com.intellij.debugger.engine.events.SuspendContextCommandImpl;
 import com.intellij.debugger.impl.DebuggerContextImpl;
 import com.intellij.debugger.ui.impl.watch.DebuggerTreeNodeImpl;
@@ -86,5 +87,5 @@ public abstract class BaseCopyAction extends DebuggerAction {
         return ((ValueDescriptor)descriptor).getValue();
     }
 
-    protected abstract String processText(Project project, Value value, DebuggerTreeNodeImpl debuggerTreeNode, DebuggerContextImpl debuggerContext);
+    protected abstract String processText(Project project, Value value, DebuggerTreeNodeImpl debuggerTreeNode, DebuggerContextImpl debuggerContext) throws EvaluateException;
 }
