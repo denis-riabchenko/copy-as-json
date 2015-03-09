@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb43de80-4e3c-415b-8e39-024b1e5e4dd7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/riabchenko/idea/JSONCopyAction.java" />
-      <change type="DELETED" beforePath="C:\workspaces\copy-as-json\src\com\riabchenko\CopyAction.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\workspaces\copy-as-json\src\com\riabchenko\BaseCopyAction.java" afterPath="$PROJECT_DIR$/src/com/riabchenko/idea/BaseCopyAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CopyAsPlugin.iws" />
@@ -957,7 +953,8 @@
     <MESSAGE value="CopyAction from CE (not working due to NPE)&#10;" />
     <MESSAGE value="CopyValue like action" />
     <MESSAGE value="CopyValue like action&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="CopyValue like action&#10;" />
+    <MESSAGE value="JSONCopyAction&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="JSONCopyAction&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
