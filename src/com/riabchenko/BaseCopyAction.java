@@ -6,7 +6,6 @@ import com.intellij.debugger.DebuggerManagerEx;
 import com.intellij.debugger.actions.DebuggerAction;
 import com.intellij.debugger.engine.events.SuspendContextCommandImpl;
 import com.intellij.debugger.impl.DebuggerContextImpl;
-import com.intellij.debugger.impl.DebuggerUtilsEx;
 import com.intellij.debugger.ui.impl.watch.DebuggerTreeNodeImpl;
 import com.intellij.debugger.ui.impl.watch.NodeDescriptorImpl;
 import com.intellij.debugger.ui.tree.ValueDescriptor;
@@ -14,26 +13,19 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.openapi.progress.util.ProgressWindowWithNotification;
 import com.intellij.openapi.project.Project;
 import com.sun.jdi.Value;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseCopyAction extends DebuggerAction {
+import java.awt.datatransfer.StringSelection;
 
+public abstract class BaseCopyAction extends DebuggerAction {
     public void actionPerformed(AnActionEvent e) {
         final DataContext actionContext = e.getDataContext();
         final Project project = CommonDataKeys.PROJECT.getData(actionContext);
         final DebuggerTreeNodeImpl node = getSelectedNode(actionContext);
-//        final String text = getValueText(node);
-//        if (text != null) {
-//            DebuggerInvocationUtil.swingInvokeLater(project, new Runnable() {
-//                public void run() {
-//                    processText(project, text, node, null);
-//                }
-//            });
-//            return;
-//        }
         final Value value = getValue(node);
         if (value == null) {
             return;
@@ -57,7 +49,7 @@ public abstract class BaseCopyAction extends DebuggerAction {
                 //noinspection HardCodedStringLiteral
                 progressWindow.setText(DebuggerBundle.message("progress.evaluating", "toString()"));
 
-                final String valueAsString = DebuggerUtilsEx.getValueOrErrorAsString(debuggerContext.createEvaluationContext(), value);
+                final String valueAsString = processText(project, value, node, debuggerContext);
 
                 if (progressWindow.isCanceled()) {
                     return;
@@ -65,11 +57,7 @@ public abstract class BaseCopyAction extends DebuggerAction {
 
                 DebuggerInvocationUtil.swingInvokeLater(project, new Runnable() {
                     public void run() {
-                        String text = valueAsString;
-                        if (text == null) {
-                            text = "";
-                        }
-                        processText(project, text, node, debuggerContext);
+                        CopyPasteManager.getInstance().setContents(new StringSelection(valueAsString));
                     }
                 });
             }
@@ -77,8 +65,6 @@ public abstract class BaseCopyAction extends DebuggerAction {
         progressWindow.setTitle(DebuggerBundle.message("title.evaluating"));
         debuggerContext.getDebugProcess().getManagerThread().startProgress(getTextCommand, progressWindow);
     }
-
-    protected abstract void processText(final Project project, String text, DebuggerTreeNodeImpl node, DebuggerContextImpl debuggerContext);
 
     public void update(AnActionEvent e) {
         Presentation presentation = e.getPresentation();
@@ -99,4 +85,6 @@ public abstract class BaseCopyAction extends DebuggerAction {
         }
         return ((ValueDescriptor)descriptor).getValue();
     }
+
+    protected abstract String processText(Project project, Value value, DebuggerTreeNodeImpl debuggerTreeNode, DebuggerContextImpl debuggerContext);
 }
