@@ -1,0 +1,29 @@
+<idea-plugin version="2">
+    <id>com.riabchenko.CopyAsJson</id>
+    <name>Copy As Json</name>
+    <version>1.0</version>
+    <vendor email="ryabchenko@gmail.com">Denis Riabchenko</vendor>
+
+    <description>
+        Plugin allows to copy some object from watches/variables window as JSON representation of instance
+    </description>
+
+    <idea-version since-build="131"/>
+
+    <actions>
+        <!-- This case is OK. I can see "Copy as JSON" item in Alt+Insert popup -->
+        <action id="testAction" class="com.riabchenko.CopyAction" text="Copy as JSON"
+                description="Copies JSON representation of instance in Variables or Watches debug views">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+
+        <!-- This case is NOT OK. There is no "Copy as JSON" in variables/watches/inspection popups -->
+        <action id="CopyAsJson.Copy" class="com.riabchenko.CopyAction" text="Copy as JSON"
+                description="Copies JSON representation of instance in Variables or Watches debug views">
+            <add-to-group group-id="Debugger.FramePanelPopup" anchor="last" />
+            <add-to-group group-id="Debugger.EvaluationDialogPopup" anchor="last" />
+            <add-to-group group-id="Debugger.InspectPanelPopup" anchor="last" />
+            <add-to-group group-id="Debugger.WatchesPanelPopup" anchor="last" />
+        </action>
+    </actions>
+</idea-plugin>
