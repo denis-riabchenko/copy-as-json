@@ -17,6 +17,8 @@
             <add-to-group group-id="Debugger.EvaluationDialogPopup" relative-to-action="Debugger.CopyValue" anchor="after" />
             <add-to-group group-id="Debugger.InspectPanelPopup" relative-to-action="Debugger.CopyValue" anchor="after" />
             <add-to-group group-id="Debugger.WatchesPanelPopup" relative-to-action="Debugger.CopyValue" anchor="after" />
+
+            <add-to-group group-id="JavaDebuggerActions" relative-to-action="Debugger.CopyValue" anchor="after" />
         </action>
     </actions>
 </idea-plugin>
